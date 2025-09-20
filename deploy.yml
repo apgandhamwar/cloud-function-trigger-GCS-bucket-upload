@@ -1,0 +1,27 @@
+name: deploy-cloud-functions
+
+on:
+  workflow_dispatch
+
+jobs:
+  cloud-function:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.google_credentials }}
+      - id: 'deploy'
+        uses: 'google-github-actions/deploy-cloud-functions@v4'
+        timeout-minutes: 10
+        with:
+          name: 'my-cloud-run-function'
+          runtime: 'nodejs22'
+          source_dir: '.'
+          entry_point: 'myHttpFunction'
+          project_id: 'ardent-case-465107-c9'
+          region: 'us-central1'
+      - id: 'test'
+        run: 'curl "${{ steps.deploy.outputs.url }}"'
