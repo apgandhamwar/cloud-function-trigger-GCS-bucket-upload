@@ -17,7 +17,7 @@ jobs:
         uses: 'google-github-actions/deploy-cloud-functions@v4'
         timeout-minutes: 10
         with:
-          name: 'my-cloud-run-function'
+          name: 'cloud-run-trigger-function'
           runtime: 'nodejs22'
           source_dir: '.'
           entry_point: 'myHttpFunction'
