@@ -1,1 +1,11 @@
-
+{
+  "name": "gcs-event-handler",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "functions-framework --target=handleStorageEvent"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0"
+  }
+}
